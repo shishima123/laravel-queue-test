@@ -16,7 +16,7 @@ class SendMail implements ShouldQueue
      */
     public function __construct(protected User $user)
     {
-        //
+        $this->onQueue('email');
     }
 
     /**

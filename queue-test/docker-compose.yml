@@ -70,6 +70,7 @@ services:
             - rabbitmq_data_queue_test:/var/lib/rabbitmq
 networks:
     sail:
+        name: queue-test-network
         driver: bridge
 volumes:
     sail-redis:
