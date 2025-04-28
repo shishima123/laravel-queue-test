@@ -2,28 +2,23 @@
 
 namespace App\Jobs;
 
-use App\Models\User;
+use App\Events\MailLog;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 
 class LogEmail implements ShouldQueue
 {
     use Queueable;
 
-    public function __construct()
+    public function __construct(protected array $userData)
     {
         $this->onQueue('log');
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
     public function handle()
     {
-        echo 'reverb';
+        Log::info('Application B: Processing user data', ['userData' => $this->userData]);
+        event(new MailLog($this->userData));
     }
 }
