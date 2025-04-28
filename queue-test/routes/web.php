@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    User::limit(1)->get()->each(function ($user) {
+    User::inRandomOrder(10)->limit(10)->get()->each(function ($user) {
         SendMail::dispatch($user);
         LogEmail::dispatch($user->toArray());
     });
